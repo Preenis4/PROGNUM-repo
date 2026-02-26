@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
-fig, ax = plt.subplots(figsize=(40,100)) 
+fig, ax = plt.subplots(figsize=(4,10)) 
 
-x = np.arange(-5,6,0.1)
+x = np.arange(-5,6)
 y = np.cosh(x)
 plt.scatter(x, y)
 plt.plot(x, y)
