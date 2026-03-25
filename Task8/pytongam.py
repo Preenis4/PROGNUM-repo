@@ -1,21 +1,25 @@
 import pygame
-import time
+
 pygame.init()
 
-screen = pygame.display.set_mode((600, 700), pygame.RESIZABLE)
-color = 'yellow'
+screen = pygame.display.set_mode((400, 500))
 
-pygame.display.set_caption('Albanian Virus')
-
-size = 50
+count = 1
 running = True
+fps = 0
+ticks = 0
+
+klok = pygame.time.Clock()
+
 while running:
+    deltaT =
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
-    screen.fill('black')
-    pygame.display.flip()
-    xm, ym = pygame.mouse.get_pos()
-    pygame.draw.rect(screen, color, pygame.Rect(xm-size,ym-size, 2*size, 2*size))
-    pygame.display.flip()
+            print(f'Framerate was {fps} FPS')
+            pygame.quit()
+    ticks = pygame.time.get_ticks()
+    print(count*1000/ticks)
+
+    count += 1
+    pygame.time.wait(14)
 
