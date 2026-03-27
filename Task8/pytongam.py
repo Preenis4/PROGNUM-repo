@@ -1,25 +1,45 @@
 import pygame
+import sys
 
 pygame.init()
 
-screen = pygame.display.set_mode((400, 500))
+win = pygame.display.set_mode((500, 500))
 
-count = 1
-running = True
-fps = 0
-ticks = 0
+x = 200
+y = 200
 
-klok = pygame.time.Clock()
+wideness = 20
+highness = 20
 
-while running:
-    deltaT =
+vel = 10
+run = True
+
+while run:
+    pygame.time.delay(10)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            print(f'Framerate was {fps} FPS')
-            pygame.quit()
-    ticks = pygame.time.get_ticks()
-    print(count*1000/ticks)
+            sys.exit()
 
-    count += 1
-    pygame.time.wait(14)
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_LEFT] and x>0:
+        x -= vel
+    if keys[pygame.K_RIGHT] and x<500:
+        x += vel
+    if keys[pygame.K_UP] and y>0:
+        y -= vel
+    if keys[pygame.K_DOWN] and y<500:
+        y += vel
+
+    win.fill((0, 0, 0))
+    pygame.draw.rect(win, (255, 0, 0), (x, y, wideness, highness))
+    pygame.display.update()
+
+
+
+
+
+
+
+
 
