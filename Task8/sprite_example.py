@@ -6,7 +6,7 @@ COLOR = (255, 100, 98)
 SURFACE_COLOR = (167, 255, 100)
 WIDENESS = 500
 HIGHNESS = 500
-vel
+vel = 10
 
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, color, highness, wideness):
@@ -15,6 +15,7 @@ class Sprite(pygame.sprite.Sprite):
         self.image = pygame.Surface([wideness, highness])
         self.image.fill(SURFACE_COLOR)
         self.image.set_colorkey(COLOR)
+
 
         pygame.draw.rect(self.image, color, pygame.Rect(0, 0, wideness, highness))
 
