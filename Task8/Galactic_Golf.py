@@ -2,17 +2,35 @@ import pygame
 import sys
 import numpy as np
 from astropy.io import fits
+import matplotlib.pyplot as plt
 
-COLOR = (255, 100, 98)
+TILE_COLOR = (255, 100, 98)
 size = 10
 SURFACE_COLOR = (167, 255, 100)
+BALL_COLOR = (0, 0, 255)
 ScreenWideness = 500
 ScreenHighness = 500
 ShootAngle = 0
 FRICTION = 10
 power = 0
 setup = True
-data =
+data = fits.open('map.fits')[0].data
+yf, xf = 1/np.shape(data)
+uf = 1/np.max(data)
+img = pygame.image.load('compmap.png')
+
+tile_list = pygame.sprite.Group()
+
+class Tile(pygame.sprite.Sprite):
+    def __init__(self, wideness, highness, upness):
+        super().__init__()
+        self.upness = upness
+        self.col = ((255*uf)*upness, (255*uf)*upness, (255*uf)*upness)
+        self.image = pygame.Surface([wideness, highness])
+        self.image.fill(SURFACE_COLOR)
+        self.image.set_colorkey(TILE_COLOR)
+        pygame.draw.rect(self.image, self.col, pygame.Rect(0, 0, wideness, highness))
+        self.rect = self.image.get_rect()
 
 
 class Ball(pygame.sprite.Sprite):
@@ -22,13 +40,14 @@ class Ball(pygame.sprite.Sprite):
         self.highness = highness
         self.image = pygame.Surface([wideness, highness])
         self.image.fill(SURFACE_COLOR)
-        self.image.set_colorkey(COLOR)
+        self.image.set_colorkey(BALL_COLOR)
 
-        pygame.draw.circle(self.image, color, (0, 0, wideness*(upness//10), highness*(upness//10))
+        pygame.draw.circle(self.image, color, (0, 0, wideness*(upness//10), highness*(upness//10)))
 
         self.rect = self.image.get_rect()
 
-    def move(self, (x, y), vel):
+    def move(self, coords, vel):
+        x, y = coords
         self.rect.x += x*vel
         self.rect.y += y*vel
 
@@ -38,13 +57,11 @@ class Ball(pygame.sprite.Sprite):
 
 class Field:
     def __init__(self, wideness, highness, data):
-        ysz, xsz = np.shape(data)
-        for j in data:
-            for i in j:
-                pass
+        for (x, y), element in np.ndenumerate(data):
+            col = (255/np.max(data))*element
 
 
-myball = Ball(COLOR, size, size, 0)
+myball = Ball(BALL_COLOR, size, size, 0)
 
 while True:
     for event in pygame.event.get()

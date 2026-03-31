@@ -3,7 +3,7 @@ import sys
 import random
 
 COLOR = (255, 100, 98)
-SURFACE_COLOR = (167, 255, 100)
+SURFACE_COLOR = (255, 255, 255)
 WIDENESS = 500
 HIGHNESS = 500
 vel = 10
